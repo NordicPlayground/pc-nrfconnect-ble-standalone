@@ -1,0 +1,150 @@
+{
+    "name": "nrfconnect-bluetooth-le",
+    "version": "3.10.1-pre2",
+    "description": "nRF Connect for Desktop",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/NordicSemiconductor/pc-nrfconnect-launcher.git"
+    },
+    "main": "src/main",
+    "scripts": {
+        "start": "echo 'please run `npm run dev` in one tab and then `npm run app` in another one'",
+        "postinstall": "node getJlink.js",
+        "app": "electron .",
+        "dev": "nrfconnect-scripts build-watch",
+        "webpack": "nrfconnect-scripts build-dev",
+        "build": "nrfconnect-scripts build-prod",
+        "lint": "nrfconnect-scripts lint src test-e2e *.js",
+        "test": "jest --testResultsProcessor jest-bamboo-formatter src/",
+        "test-watch": "jest --watch src/",
+        "test-e2e": "xvfb-maybe npx playwright test test-e2e/",
+        "pack": "npm run build && electron-builder -p never",
+        "release": "electron-builder -p always",
+        "install-devtools": "electron . --install-devtools",
+        "remove-devtools": "electron . --remove-devtools"
+    },
+    "author": "Nordic Semiconductor ASA",
+    "license": "Proprietary",
+    "build": {
+        "appId": "com.nordicsemi.nrfconnect-ble",
+        "productName": "nRF Connect for Desktop BLE",
+        "npmRebuild": false,
+        "publish": [
+            "github"
+        ],
+        "files": [
+            "dist/",
+            "src/main/",
+            "node_modules/",
+            "resources/**/*"
+        ],
+        "directories": {
+            "output": "release"
+        },
+        "linux": {
+            "target": [
+                "AppImage",
+                "tar.gz"
+            ],
+            "artifactName": "${name}-${version}-${arch}.${ext}",
+            "category": "Development",
+            "icon": "resources/icon.icns"
+        },
+        "afterSign": "build/notarize.js",
+        "mac": {
+            "category": "public.app-category.developer-tools",
+            "artifactName": "${name}-${version}-${os}.${ext}",
+            "hardenedRuntime": true,
+            "gatekeeperAssess": false,
+            "entitlements": "build/entitlements.mac.plist",
+            "entitlementsInherit": "build/entitlements.mac.plist",
+            "icon": "resources/icon.icns"
+        },
+        "dmg": {
+            "artifactName": "${name}-${version}.${ext}",
+            "sign": false
+        },
+        "win": {
+            "target": "nsis",
+            "publisherName": "Nordic Semiconductor ASA",
+            "icon": "resources/icon.ico"
+        },
+        "nsis": {
+            "menuCategory": "Nordic Semiconductor",
+            "include": "build/installer.nsh",
+            "artifactName": "${name}-setup-${version}-${arch}.${ext}"
+        }
+    },
+    "devDependencies": {
+        "@playwright/test": "^1.16.3",
+        "@types/node": "14.17.17",
+        "asar": "3.0.3",
+        "bootstrap": "4.6.1",
+        "electron": "13.5.1",
+        "electron-builder": "^22.14.13",
+        "electron-devtools-installer": "3.2.0",
+        "electron-notarize": "0.3.0",
+        "mini-css-extract-plugin": "0.9.0",
+        "pc-nrfconnect-shared": "github:NordicSemiconductor/pc-nrfconnect-shared#v5.18.0",
+        "playwright": "^1.16.3",
+        "xvfb-maybe": "0.2.1"
+    },
+    "dependencies": {
+        "@electron/remote": "^2.0.4",
+        "@mdi/font": "3.7.95",
+        "@nordicsemiconductor/nrf-device-lib-js": "^0.4.4",
+        "axios": "0.22.0",
+        "bluetooth-numbers-database": "github:NordicSemiconductor/bluetooth-numbers-database#75bb6a8079",
+        "chmodr": "1.2.0",
+        "electron-log": "4.2.0",
+        "electron-store": "8.0.1",
+        "electron-updater": "4.3.1",
+        "eslint-config-airbnb": "18.1.0",
+        "eslint-config-airbnb-base": "14.1.0",
+        "fs-extra": "9.0.0",
+        "mousetrap": "1.6.5",
+        "mustache": "4.0.1",
+        "pc-ble-driver-js": "2.8.2",
+        "react": "16.13.1",
+        "react-dom": "16.13.1",
+        "react-markdown": "4.3.1",
+        "react-redux": "7.2.0",
+        "roboto-fontface": "0.10.0",
+        "serialport": "8.0.8",
+        "shasum": "1.0.2",
+        "targz": "1.0.1",
+        "uuid": "8.1.0",
+        "yargs": "15.3.1"
+    },
+    "eslintConfig": {
+        "extends": "./node_modules/pc-nrfconnect-shared/config/eslintrc.json"
+    },
+    "prettier": "./node_modules/pc-nrfconnect-shared/config/prettier.config.js",
+    "jest": {
+        "moduleNameMapper": {
+            "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$": "<rootDir>/node_modules/pc-nrfconnect-shared/mocks/fileMock.js",
+            "\\.(css|scss)$": "<rootDir>/node_modules/pc-nrfconnect-shared/mocks/emptyMock.js",
+            "^electron$": "<rootDir>/node_modules/pc-nrfconnect-shared/mocks/electronMock.js",
+            "^electron-store$": "<rootDir>/node_modules/pc-nrfconnect-shared/mocks/electronStoreMock.js",
+            "serialport": "<rootDir>/node_modules/pc-nrfconnect-shared/mocks/emptyMock.js"
+        },
+        "transform": {
+            "^.+\\.[jt]sx?$": [
+                "babel-jest",
+                {
+                    "configFile": "./node_modules/pc-nrfconnect-shared/config/babel.config.js"
+                }
+            ]
+        },
+        "transformIgnorePatterns": [
+            "node_modules/(?!(pc-nrfconnect-shared)/)"
+        ],
+        "setupFilesAfterEnv": [
+            "<rootDir>/node_modules/pc-nrfconnect-shared/test/setupTests.js",
+            "<rootDir>/src/setupMocks.js"
+        ],
+        "snapshotSerializers": [
+            "enzyme-to-json/serializer"
+        ]
+    }
+}

@@ -1,0 +1,61 @@
+{
+    "pc-nrfconnect-ble": {
+        "displayName": "Bluetooth Low Energy",
+        "description": "General tool for development and testing with Bluetooth Low Energy",
+        "homepage": "https://github.com/NordicSemiconductor/pc-nrfconnect-ble",
+        "url": "https://developer.nordicsemi.com/.pc-tools/nrfconnect-apps/pc-nrfconnect-ble"
+    },
+    "pc-nrfconnect-rssi": {
+        "displayName": "RSSI Viewer",
+        "description": "Live visualization of RSSI per frequency for nRF52832",
+        "homepage": "https://github.com/NordicSemiconductor/pc-nrfconnect-rssi",
+        "url": "https://developer.nordicsemi.com/.pc-tools/nrfconnect-apps/pc-nrfconnect-rssi"
+    },
+    "pc-nrfconnect-ppk": {
+        "displayName": "Power Profiler",
+        "description": "App for use with Nordic Power Profiler Kits",
+        "homepage": "https://github.com/NordicSemiconductor/pc-nrfconnect-ppk",
+        "url": "https://developer.nordicsemi.com/.pc-tools/nrfconnect-apps/pc-nrfconnect-ppk"
+    },
+    "pc-nrfconnect-programmer": {
+        "displayName": "Programmer",
+        "description": "Tool for flash programming of nRF SoCs",
+        "homepage": "https://github.com/NordicSemiconductor/pc-nrfconnect-programmer",
+        "url": "https://developer.nordicsemi.com/.pc-tools/nrfconnect-apps/pc-nrfconnect-programmer"
+    },
+    "pc-nrfconnect-linkmonitor": {
+        "displayName": "LTE Link Monitor",
+        "description": "Link monitor and AT command terminal",
+        "homepage": "https://github.com/NordicSemiconductor/pc-nrfconnect-linkmonitor",
+        "url": "https://developer.nordicsemi.com/.pc-tools/nrfconnect-apps/pc-nrfconnect-linkmonitor"
+    },
+    "pc-nrfconnect-tracecollector": {
+        "displayName": "Trace Collector",
+        "description": "Capture nRF91 modem trace",
+        "homepage": "https://github.com/NordicSemiconductor/pc-nrfconnect-tracecollector",
+        "url": "https://developer.nordicsemi.com/.pc-tools/nrfconnect-apps/pc-nrfconnect-tracecollector"
+    },
+    "pc-nrfconnect-tracecollector-preview": {
+        "displayName": "Trace Collector V2 preview",
+        "description": "EXPERIMENTAL: Capture and convert nRF91 modem traces",
+        "url": "https://developer.nordicsemi.com/.pc-tools/nrfconnect-apps/pc-nrfconnect-tracecollector-preview"
+    },
+    "pc-nrfconnect-gettingstarted": {
+        "displayName": "Getting Started Assistant",
+        "description": "Guide to set up the nRF Connect SDK",
+        "homepage": "https://github.com/NordicSemiconductor/pc-nrfconnect-gettingstarted",
+        "url": "https://developer.nordicsemi.com/.pc-tools/nrfconnect-apps/pc-nrfconnect-gettingstarted"
+    },
+    "pc-nrfconnect-dtm": {
+        "displayName": "Direct Test Mode",
+        "description": "RF PHY testing of Bluetooth Low Energy devices",
+        "homepage": "https://github.com/NordicSemiconductor/pc-nrfconnect-dtm",
+        "url": "https://developer.nordicsemi.com/.pc-tools/nrfconnect-apps/pc-nrfconnect-dtm"
+    },
+    "pc-nrfconnect-toolchain-manager": {
+        "displayName": "Toolchain Manager",
+        "description": "Install and manage tools to develop with the nRF Connect SDK (NCS)",
+        "homepage": "https://github.com/NordicPlayground/pc-nrfconnect-toolchain-manager",
+        "url": "https://developer.nordicsemi.com/.pc-tools/nrfconnect-apps/pc-nrfconnect-toolchain-manager"
+    }
+}

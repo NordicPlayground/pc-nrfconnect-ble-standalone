@@ -1,0 +1,13 @@
+*~
+.DS_Store
+.idea
+.env
+build/nrfjprog
+build/JLink*
+build/Release
+dist
+jest.json
+/node_modules
+npm-debug.log
+release
+nrfjprog

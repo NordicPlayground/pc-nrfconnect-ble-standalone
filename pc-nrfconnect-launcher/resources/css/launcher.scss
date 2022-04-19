@@ -1,0 +1,272 @@
+/*
+ * Copyright (c) 2019 Nordic Semiconductor ASA
+ *
+ * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
+ */
+
+@import '~@mdi/font/css/materialdesignicons.min.css';
+
+$roboto-font-path: '~roboto-fontface/fonts' !default;
+@import '~roboto-fontface/css/roboto/sass/roboto-fontface';
+
+$font-family-sans-serif: Roboto;
+$theme-colors: (
+    'primary': #00a9ce,
+    // Nordic primary blue
+);
+$enable-transitions: false;
+$enable-rounded: false;
+$body-bg: #cfd8dc;
+@import '~bootstrap/scss/bootstrap';
+
+@import './pretty-scrollbar';
+
+body {
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+    cursor: default;
+}
+
+#webapp {
+    display: grid;
+    grid-template-rows: 0fr 1fr;
+    height: 100vh;
+
+    .nav {
+        background-color: theme-color('primary');
+        padding: 0.5rem 2rem;
+        align-items: center;
+
+        .nav-link {
+            height: 3rem;
+
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: 300;
+            align-items: center;
+
+            display: flex;
+
+            &.active {
+                font-weight: bold;
+                cursor: default;
+            }
+        }
+
+        .core19-logo {
+            height: 2.5rem;
+        }
+    }
+
+    .tab-content {
+        padding: 0 0 16px 32px;
+        overflow: hidden;
+        .progress {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            border-radius: 0;
+            background-color: transparent;
+        }
+    }
+
+    .content-container {
+        padding-right: 16px;
+    }
+
+    .with-scrollbar {
+        // Height: subtract navigation header (64px), the 16px margin at top and 16 px spacing bottom
+        height: calc(100vh - 64px - 16px - 16px);
+        margin: 16px 16px 0 0;
+        @extend %pretty-scrollbar;
+    }
+    .filter-adjusted-height {
+        // Height: subtract navigation header (64px) and filterbox (48px) and 16px spacing bottom
+        height: calc(100vh - 64px - 48px - 16px);
+        margin-top: 0;
+    }
+}
+
+.core-app-icon {
+    position: relative;
+
+    img,
+    .icon-replacement {
+        height: 48px;
+        width: 48px;
+    }
+
+    .icon-replacement {
+        border-radius: 7px;
+        background: #e6f8ff;
+    }
+
+    // Transform old primary color to match brand.
+    &.old-app-icon {
+        filter: hue-rotate(-10deg) brightness(106%);
+    }
+
+    .mdi {
+        position: absolute;
+        top: 22px;
+        left: 27px;
+        font-size: 20px;
+    }
+
+    .mdi-alert {
+        color: darkorange;
+    }
+
+    .mdi-information {
+        color: theme-color('primary');
+    }
+
+    .alert-icon-bg {
+        position: absolute;
+        width: 8px;
+        height: 12px;
+        top: 32px;
+        left: 34px;
+        background-color: white;
+    }
+}
+
+.wide-btns > .btn {
+    min-width: 10ch;
+}
+
+.btn-toolbar {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 0.75em;
+}
+
+.btn {
+    line-height: 1em;
+}
+
+.ellipsize-left {
+    direction: rtl;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card + .card {
+    margin-top: 1rem;
+}
+
+#app-sources .row + .row {
+    margin-top: 1rem;
+}
+
+#app-sources .item-name {
+    font-weight: 500;
+    font-size: 90%;
+}
+
+.modal-title {
+    font-size: 120%;
+}
+
+.h4,
+.h5 {
+    font-weight: 400;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-footer {
+    border-top: none;
+}
+
+.modal-content {
+    padding: 1rem;
+}
+
+.text-muted-more {
+    @extend .text-muted;
+    color: lighten($color: $text-muted, $amount: 30%) !important;
+}
+
+.dropdown-menu:empty {
+    @extend .text-muted-more;
+    @extend .small;
+    text-align: center;
+
+    &::after {
+        content: 'No actions available';
+    }
+}
+
+.release-notes {
+    @extend %pretty-scrollbar;
+    h2 {
+        font-size: 1.25rem;
+    }
+    h3 {
+        font-size: 1rem;
+    }
+}
+
+.filterbox {
+    z-index: 1;
+    top: 0;
+    height: 48px;
+    position: sticky;
+    background-color: $body-bg;
+    align-items: center;
+
+    > * {
+        margin-left: 0.75em;
+    }
+    :first-child {
+        margin-left: 0;
+    }
+
+    .btn .mdi {
+        margin-right: 0.25rem;
+    }
+    .btn:not(:hover) {
+        background: white;
+        color: $text-muted;
+    }
+    .dropdown-toggle::after {
+        display: none;
+    }
+    .form-control {
+        line-height: 1em;
+        height: initial !important;
+        width: initial !important;
+        border-color: $secondary;
+        padding: 0.29rem 0.75rem;
+    }
+}
+
+.user-data-policy {
+    overflow-y: scroll;
+    height: 40vh;
+}
+
+.dropdown-toggle:empty::after {
+    position: relative;
+    top: 2px;
+}
+
+.settings-pane-container {
+    .toggle label {
+        justify-content: flex-start;
+    }
+
+    .toggle-label {
+        font-size: 1rem;
+    }
+}
+
+.me_32px {
+    margin-right: 32px;
+}
