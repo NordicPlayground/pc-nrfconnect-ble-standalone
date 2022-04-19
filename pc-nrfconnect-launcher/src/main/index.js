@@ -11,14 +11,13 @@ require('./setUserDataDir');
 
 require('@electron/remote/main').initialize();
 
-const { Menu, ipcMain, dialog, app: electronApp } = require('electron');
+const { ipcMain, dialog, app: electronApp } = require('electron');
 const { argv } = require('yargs');
 const { join } = require('path');
 
 const config = require('./config');
 const windows = require('./windows');
 const apps = require('./apps');
-const { createMenu } = require('./menu');
 const loadDevtools = require('./devtools');
 const { createTextFile } = require('./fileUtil');
 const fs = require('fs');
@@ -36,27 +35,12 @@ electronApp.allowRendererProcessReuse = false;
 electronApp.on('ready', async () => {
     loadDevtools();
 
-
     try {
         const bundlePath = `${config.getElectronResourcesDir()}/bundle/`;
         const appToLaunch = await apps.readAppInfo(bundlePath);
         if (await fs.existsSync(bundlePath)) {
             return windows.openAppWindow(appToLaunch);
         }
-        const applications = await apps.getOfficialApps();
-        const existingBleApp = applications.fulfilled.find(
-            app => app.name === 'pc-nrfconnect-ble'
-        );
-
-        if (!existingBleApp || existingBleApp.currentVersion !== '3.0.1') {
-            await apps.installOfficialApp(
-                'pc-nrfconnect-ble',
-                '3.0.1',
-                'official'
-            );
-        }
-
-        await windows.openOfficialAppWindow('pc-nrfconnect-ble', 'official');
     } catch (error) {
         dialog.showMessageBox(
             {
