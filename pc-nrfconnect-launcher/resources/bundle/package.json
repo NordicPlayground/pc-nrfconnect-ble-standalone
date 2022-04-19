@@ -1,0 +1,16 @@
+{
+  "name": "pc-nrfconnect-ble",
+  "version": "3.0.1",
+  "description": "A natural first choice for Bluetooth Low Energy development",
+  "displayName": "Bluetooth Low Energy Standalone",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NordicPlayground/pc-nrfconnect-ble-standalone.git"
+  },
+  "author": "Nordic Semiconductor ASA",
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "bundle.js",
+  "engines": {
+    "nrfconnect": "^3.8.0"
+  }
+}

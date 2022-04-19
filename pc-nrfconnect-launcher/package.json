@@ -1,6 +1,6 @@
 {
     "name": "nrfconnect-bluetooth-le",
-    "version": "3.10.1-pre2",
+    "version": "3.10.1",
     "description": "nRF Connect for Desktop",
     "repository": {
         "type": "git",
@@ -36,7 +36,7 @@
             "dist/",
             "src/main/",
             "node_modules/",
-            "resources/**/*"
+            "resources/"
         ],
         "directories": {
             "output": "release"
