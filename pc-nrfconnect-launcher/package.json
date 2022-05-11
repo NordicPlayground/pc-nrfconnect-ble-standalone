@@ -1,6 +1,6 @@
 {
-    "name": "nrfconnect-bluetooth-le",
-    "version": "3.10.1",
+    "name": "nrfconnect-bluetooth-low-energy",
+    "version": "4.0.0",
     "description": "nRF Connect for Desktop",
     "repository": {
         "type": "git",
@@ -27,7 +27,7 @@
     "license": "Proprietary",
     "build": {
         "appId": "com.nordicsemi.nrfconnect-ble",
-        "productName": "nRF Connect for Desktop BLE",
+        "productName": "nRF Connect for Desktop Bluetooth Low Energy",
         "npmRebuild": false,
         "publish": [
             "github"
