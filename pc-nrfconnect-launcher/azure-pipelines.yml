@@ -1,6 +1,5 @@
 trigger:
-- master
-- release/*
+- main
 
 jobs:
 - job: Build
@@ -17,7 +16,7 @@ jobs:
   strategy:
     matrix:
       linux:
-        IMAGE_NAME: 'ubuntu-18.04'
+        IMAGE_NAME: 'ubuntu-latest'
       macOS:
         IMAGE_NAME: 'macos-11'
       win32:
@@ -68,6 +67,7 @@ jobs:
       set -o errexit -o pipefail
       export ENABLE_DRAFT_TEST=true
       export NODE_PRE_GYP_GITHUB_TOKEN=$(WAYLAND_GITHUB_TOKEN)
+      cd pc-nrfconnect-launcher
       cat .npmrc-internal >> .npmrc
       npm config set //npm.nordicsemi.no/:_authToken $(WAYLAND_NPM_TOKEN_INTERNAL)
       npm ci
@@ -81,6 +81,7 @@ jobs:
       set -o errexit -o pipefail
       export ENABLE_DRAFT_TEST=true
       export NODE_PRE_GYP_GITHUB_TOKEN=$(WAYLAND_GITHUB_TOKEN)
+      cd pc-nrfconnect-launcher
       cat .npmrc-internal >> .npmrc
       npm config set //npm.nordicsemi.no/:_authToken $(WAYLAND_NPM_TOKEN_INTERNAL)
       npm ci
@@ -129,6 +130,7 @@ jobs:
 
   - bash: |
       set -o errexit -o pipefail
+      cd pc-nrfconnect-launcher
       npm ci
       npm run lint
       npm run build
@@ -138,6 +140,7 @@ jobs:
 
   - bash: |
       set -o errexit -o pipefail
+      cd pc-nrfconnect-launcher
       npm i -g node-gyp@6.0.1
       npm config set node_gyp "C:\npm\prefix\node_modules\node-gyp\bin\node-gyp.js"
       npm ci
@@ -171,7 +174,7 @@ jobs:
 
   - task: ArchiveFiles@2
     inputs:
-      rootFolderOrFile: '$(Build.SourcesDirectory)/release/win-$(ARCH)-unpacked'
+      rootFolderOrFile: '$(Build.SourcesDirectory)/pc-nrfconnect-launcher/release/win-$(ARCH)-unpacked'
       includeRootFolder: false
       archiveType: 'zip'
       archiveFile: '$(Build.ArtifactStagingDirectory)/nrfconnect-portable-$(ARCH)-$(Build.BuildNumber).zip'
@@ -183,7 +186,7 @@ jobs:
 
   - task: ArchiveFiles@2
     inputs:
-      rootFolderOrFile: '$(Build.SourcesDirectory)/release/win-unpacked'
+      rootFolderOrFile: '$(Build.SourcesDirectory)/pc-nrfconnect-launcher/release/win-unpacked'
       includeRootFolder: false
       archiveType: 'zip'
       archiveFile: '$(Build.ArtifactStagingDirectory)/nrfconnect-portable-$(Build.BuildNumber).zip'
