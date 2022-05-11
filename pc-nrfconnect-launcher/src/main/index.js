@@ -39,7 +39,7 @@ electronApp.on('ready', async () => {
         const bundlePath = `${config.getElectronResourcesDir()}/bundle/`;
         const appToLaunch = await apps.readAppInfo(bundlePath);
         if (await fs.existsSync(bundlePath)) {
-            return windows.openAppWindow(appToLaunch);
+            windows.openAppWindow(appToLaunch);
         }
     } catch (error) {
         dialog.showMessageBox(

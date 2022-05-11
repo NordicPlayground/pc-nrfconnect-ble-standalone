@@ -155,6 +155,7 @@ jobs:
     condition: and(ne(variables['Build.Reason'], 'PullRequest'), contains(variables['IMAGE_NAME'], 'ubuntu'))
     displayName: 'Setup release environment for Linux'
   - bash: |
+      cd pc-nrfconnect-launcher
       npx electron-builder -p never
     condition: and(ne(variables['Build.Reason'], 'PullRequest'), contains(variables['IMAGE_NAME'], 'ubuntu'))
     displayName: 'Release on Linux'
@@ -168,6 +169,7 @@ jobs:
   - script: |
       set CSC_LINK=$(Agent.TempDirectory)\NORDIC_SIGNING_CERTIFICATE.pfx
       set CSC_KEY_PASSWORD=$(NORDIC_SIGNING_CERTIFICATE_PASSWORD_PFX)
+      cd pc-nrfconnect-launcher
       npx electron-builder -p never --windows nsis:$(ARCH)
     condition: and(ne(variables['Build.Reason'], 'PullRequest'), contains(variables['IMAGE_NAME'], 'win'))
     displayName: 'Build electron installer on Windows'
@@ -204,6 +206,7 @@ jobs:
 
   - bash: |
       set -o errexit -o pipefail
+      cd pc-nrfconnect-launcher
       export CSC_LINK=$(Agent.TempDirectory)/NORDIC_SIGNING_CERTIFICATE.p12
       export CSC_KEY_PASSWORD=$(NORDIC_SIGNING_CERTIFICATE_PASSWORD_P12)
       export APPLEID=$(WAYLAND_APPLE_ID)
@@ -216,6 +219,7 @@ jobs:
 
   - bash: |
       set -o errexit -o pipefail
+      cd pc-nrfconnect-launcher
       cp release/*.exe "$(Build.ArtifactStagingDirectory)" || :
       cp release/*.zip "$(Build.ArtifactStagingDirectory)" || :
       cp release/*.dmg "$(Build.ArtifactStagingDirectory)" || :
