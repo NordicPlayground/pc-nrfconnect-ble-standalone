@@ -2,7 +2,7 @@
   "name": "pc-nrfconnect-ble",
   "version": "4.0.0",
   "description": "A natural first choice for Bluetooth Low Energy development",
-  "displayName": "Bluetooth Low Energy Standalone",
+  "displayName": "nRF Connect for Desktop Bluetooth Low Energy Standalone",
   "repository": {
     "type": "git",
     "url": "https://github.com/NordicPlayground/pc-nrfconnect-ble-standalone.git"

@@ -121,4 +121,16 @@ if (electronApp.isPackaged) {
             ? process.env.APPIMAGE
             : process.execPath
     ).catch(err => console.log(err.message));
+
+    // Save version of the app in a file called 'version' for the proxy ble app
+    const packageJsonRaw = fs.readFileSync(
+        join(electronApp.getAppPath(), 'package.json'),
+        { encoding: 'utf-8' }
+    );
+
+    const { version } = JSON.parse(packageJsonRaw);
+
+    createTextFile(join(global.userDataDir, 'version'), version).catch(err =>
+        console.log(err.message)
+    );
 }

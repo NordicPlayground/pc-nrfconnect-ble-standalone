@@ -36,7 +36,8 @@
             "dist/",
             "src/main/",
             "node_modules/",
-            "resources/"
+            "resources/",
+            "package.json"
         ],
         "directories": {
             "output": "release"
