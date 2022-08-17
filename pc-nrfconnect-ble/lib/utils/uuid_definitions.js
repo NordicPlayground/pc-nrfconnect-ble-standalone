@@ -12,7 +12,7 @@ import {
     services,
 } from 'bluetooth-numbers-database';
 import fs from 'fs';
-import path from 'path';
+import path, { dirname } from 'path';
 import { logger } from 'pc-nrfconnect-shared';
 
 import getAllUuids from './bluetoothUuidApi';
@@ -52,20 +52,40 @@ let RemoteDefinitions = { ...customDefinitions };
 
 let customsFileErrorMessageShown = false;
 
+/**
+ * Migrates the old uuid_definitions.json if it exists
+ * @param {string} userDataDir path to data dir for this application
+ * @returns {boolean} true if it is migrated, else return false.
+ */
+const migrateOldUuidFile = userDataDir => {
+    const oldAppUuidDefinitionsFilePath = path.join(
+        dirname(userDataDir),
+        'nrfconnect',
+        'uuid_definitions.json'
+    );
+    if (fs.existsSync(oldAppUuidDefinitionsFilePath)) {
+        fs.copyFileSync(oldAppUuidDefinitionsFilePath, uuidDefinitionsFilePath);
+        return true;
+    }
+    return false;
+};
+
 export function confirmUserUUIDsExist(userDataDir) {
     uuidDefinitionsFilePath = path.join(userDataDir, 'uuid_definitions.json');
     if (!fs.existsSync(uuidDefinitionsFilePath)) {
-        fs.writeFile(
-            uuidDefinitionsFilePath,
-            JSON.stringify(customDefinitions, null, 4),
-            err => {
-                if (err) {
-                    logger.debug(
-                        `An error ocurred creating the file ${err.message}`
-                    );
+        if (!migrateOldUuidFile(userDataDir)) {
+            fs.writeFile(
+                uuidDefinitionsFilePath,
+                JSON.stringify(customDefinitions, null, 4),
+                err => {
+                    if (err) {
+                        logger.debug(
+                            `An error ocurred creating the file ${err.message}`
+                        );
+                    }
                 }
-            }
-        );
+            );
+        }
     }
 }
 
