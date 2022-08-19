@@ -70,6 +70,20 @@ const migrateOldUuidFile = userDataDir => {
     return false;
 };
 
+export const migrateOldPersistentStorage = userDataDir => {
+    const newStorageFile = path.join(userDataDir, 'pc-nrfconnect-ble.json');
+    if (!fs.existsSync(newStorageFile)) {
+        const oldStorageFile = path.join(
+            dirname(userDataDir),
+            'nrfconnect',
+            'pc-nrfconnect-ble.json'
+        );
+        if (fs.existsSync(oldStorageFile)) {
+            fs.copyFileSync(oldStorageFile, newStorageFile);
+        }
+    }
+};
+
 export function confirmUserUUIDsExist(userDataDir) {
     uuidDefinitionsFilePath = path.join(userDataDir, 'uuid_definitions.json');
     if (!fs.existsSync(uuidDefinitionsFilePath)) {
