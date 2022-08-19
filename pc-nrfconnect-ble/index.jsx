@@ -16,10 +16,13 @@ import ServerSetup from './lib/containers/ServerSetup';
 import reducers from './lib/reducers';
 import {
     confirmUserUUIDsExist,
+    migrateOldPersistentStorage,
     populateUuids,
 } from './lib/utils/uuid_definitions';
 
 import './resources/css/styles.scss';
+
+migrateOldPersistentStorage(getUserDataDir());
 
 export default () => {
     useEffect(() => {
